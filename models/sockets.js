@@ -1,0 +1,30 @@
+const BandList = require("./band-list");
+
+class Sockets {
+  constructor(io) {
+    this.io = io;
+    this.bandList = new BandList();
+    this.socketEvents();
+  }
+
+  socketEvents() {
+    this.io.on("connection", (socket) => {
+      console.log("Cliente conectado");
+      socket.emit("current-bands", this.bandList.getBands());
+      // Ejemplo foro
+      // socket.on("mensaje-to-server", (data) => {
+      //   this.io.emit("mensaje-from-server", data);
+      // });
+      // Ejemplos
+      // socket.on("mensaje-cliente", (data) => {
+      //   console.log(data);
+      // });
+      // socket.emit("mensaje-bienvenida", {
+      //   msg: "Bienvenido",
+      //   fecha: new Date(),
+      // });
+    });
+  }
+}
+
+module.exports = Sockets;
