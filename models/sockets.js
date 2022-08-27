@@ -11,6 +11,12 @@ class Sockets {
     this.io.on("connection", (socket) => {
       console.log("Cliente conectado");
       socket.emit("current-bands", this.bandList.getBands());
+
+      socket.on("votar-banda", (id) => {
+        this.bandList.incrementVotes(id);
+        this.io.emit("current-bands", this.bandList.getBands());
+      });
+
       // Ejemplo foro
       // socket.on("mensaje-to-server", (data) => {
       //   this.io.emit("mensaje-from-server", data);
