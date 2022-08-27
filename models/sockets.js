@@ -27,6 +27,11 @@ class Sockets {
         this.io.emit("current-bands", this.bandList.getBands());
       });
 
+      socket.on("nueva-banda", ({ nombre }) => {
+        this.bandList.addBand(nombre);
+        this.io.emit("current-bands", this.bandList.getBands());
+      });
+
       // Ejemplo foro
       // socket.on("mensaje-to-server", (data) => {
       //   this.io.emit("mensaje-from-server", data);
