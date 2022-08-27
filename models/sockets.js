@@ -17,6 +17,11 @@ class Sockets {
         this.io.emit("current-bands", this.bandList.getBands());
       });
 
+      socket.on("borrar-banda", (id) => {
+        this.bandList.removeBand(id);
+        this.io.emit("current-bands", this.bandList.getBands());
+      });
+
       // Ejemplo foro
       // socket.on("mensaje-to-server", (data) => {
       //   this.io.emit("mensaje-from-server", data);
